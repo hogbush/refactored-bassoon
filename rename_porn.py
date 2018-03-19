@@ -52,3 +52,13 @@ def _reformat_filename(name):
     new_name = ' '.join(words)
 
     return new_name
+
+
+def _format_date(year: str, month: str, day: str):
+    '''
+    :param year: Year as two digits, e.g. '17'.
+    :param month: Month as two digits, e.g. '02'.
+    :param day: Day as two digits, e.g. '09'.
+    '''
+
+    return f'20{year}-{month}-{day}'
