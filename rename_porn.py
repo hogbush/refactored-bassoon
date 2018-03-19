@@ -19,7 +19,7 @@ _SPECIAL_WORDS = {
 }
 
 
-def _format_series(name):
+def _format_series(name: str):
     '''
     :param name: Series name from the ugly filename,
                  e.g. 'tf', 'tushy' or 'ted'.
@@ -33,7 +33,7 @@ def _format_series(name):
     return name
 
 
-def _reformat_filename(name):
+def _reformat_filename(name: str):
     '''
     Pretty-format the filename.
 
