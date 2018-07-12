@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 .ropeproject
+.mypy_cache/
 
 # Vim swap
 [._]*.s[a-v][a-z]
