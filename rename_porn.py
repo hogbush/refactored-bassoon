@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from typing import Dict
+import re
+from typing import Dict, Optional
 
 '''
 Porn renamer.
@@ -64,3 +65,32 @@ def _format_date(year: str, month: str, day: str) -> str:
     '''
 
     return f'20{year}-{month}-{day}'
+
+
+def _format_extension(extension: str) -> str:
+    return extension.lower()
+
+
+def format_name(name: str) -> Optional[str]:
+    '''
+    :param name: Full file name, with extension, e.g.
+        'vixen.17.09.26.jill.kassidy.and.olivia.nova.mp4'
+    '''
+
+    NAME_REGEX = r'(.+?)\.(\d\d)\.(\d\d)\.(\d\d)\.(.+)\.(.+)'
+
+    match = re.fullmatch(NAME_REGEX, name)
+    if not match:
+        return None
+
+    series, y, m, d, title, extension = match.groups()
+
+    series = _format_series(series)
+    date = _format_date(y, m, d)
+    title = _reformat_filename(title)
+    extension = _format_extension(extension)
+
+    new_name = f'[{series}] {date} {title}.{extension}'
+
+    return new_name
+
