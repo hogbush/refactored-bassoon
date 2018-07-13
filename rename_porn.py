@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
+'''A tool for renaming porn videos.'''
+
 import sys
 import re
 from pathlib import Path
 from typing import Dict, Optional
-
-'''
-Porn renamer.
-'''
 
 _SERIES: Dict[str, str] = {
     'tf': 'TeenFidelity',
