@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
+import sys
 import re
+from pathlib import Path
 from typing import Dict, Optional
 
 '''
@@ -94,3 +96,36 @@ def format_name(name: str) -> Optional[str]:
 
     return new_name
 
+
+def rename_file(path: Path) -> bool:
+    new_name = format_name(path.name)
+    if not new_name:
+        return False
+
+    new_path = path.with_name(new_name)
+    if new_path.exists():
+        return False
+
+    path.rename(new_path)
+    return True
+
+
+def rename_dir(path: Path) -> None:
+    for file in path.iterdir():
+        rename_file(file)
+
+
+def main() -> None:
+    if len(sys.argv) < 2:
+        rename_dir(Path())
+
+    for arg in sys.argv[1:]:
+        path = Path(arg)
+        if path.is_dir():
+            rename_dir(path)
+        elif path.is_file():
+            rename_file(path)
+
+
+if __name__ == '__main__':
+    main()
